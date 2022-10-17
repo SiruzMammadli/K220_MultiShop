@@ -1,0 +1,24 @@
+﻿@model SubCategory
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 m-auto">
+            <form method="post">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        SubCategory
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="categoryName">SubCategory Name</label>
+                            <input class="form-control" placeholder="Enter Category Name" type="text" name="Name" value="@Model.Name" id="categoryName" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="submit" class="btn btn-warning" value="Edit" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

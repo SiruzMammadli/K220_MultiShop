@@ -1,0 +1,66 @@
+﻿@model IEnumerable<User>
+@inject Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <a class="btn btn-primary my-3" asp-area="admin" asp-controller="userrole" asp-action="addrole">Add</a>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Positions</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px">#</th>
+                                <th>Email</th>
+                                <th>Positions</th>
+                                <th style="width: 140px; text-align: center">*</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int count = 1;
+                            }
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@count.</td>
+                                    <td>@user.Email</td>
+                                    <td>@{
+                                            var userRoles = await _userManager.GetRolesAsync(user);
+                                            string userRole = "";
+                                            foreach (var role in userRoles)
+                                            {
+                                                userRole += role +" ";
+                                            }
+                                            @userRole;
+                                        }</td>
+                             @*       <td>
+                                        <a href="/admin/category/edit/@role.Id" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="/admin/category/delete/@role.Id" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>*@
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+
+    </div>
+</div>
